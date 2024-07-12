@@ -1,3 +1,4 @@
+def gv
 pipeline {
     agent any
    // tools {     maven 'maven-3.9'   jdk 'jdk-11'    }
@@ -7,9 +8,19 @@ pipeline {
     booleanParam(name:'executeTests',defaultValue:true,description:'Do you want to run the tests?')
    }
     stages {
+        stage('init') {
+            steps{
+
+           script{
+               gv = load "script.groovy"
+           }
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Building..'
+               script{
+                gv.buildApp()
+               }
             }
         }
         stage('Test') {
@@ -19,13 +30,16 @@ pipeline {
                 }
             }
             steps {
-                echo 'Testing..'
+                script{
+                    gv.testApp()
+                }
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
-                echo"deploying ${params.VERSION}"
+               script{
+                gv.deployApp()
+               }
                 // withCredentials(
                 //     [
                 //         usernamePassword(
