@@ -2,7 +2,7 @@ def gv = [:]
 
 pipeline {
     agent any
-   // tools {     maven 'maven-3.9'   jdk 'jdk-11'    }
+    tools {     maven 'maven-3.9'    }
 
    parameters{
     choice(name:'VERSION',choices:['1.1.0','1.2.0','1.3.0'],description:'Choose the version to deploy')
@@ -53,10 +53,21 @@ pipeline {
             }
         }
         stage('Deploy') {
+            input {
+                message "Select the deployment environment..."
+                ok "Done"
+                parameters{
+                     choice(name:'ENV',choices:['dev','stating','Prod'],description:'Choose the environment to deploy')
+   
+                }
+            }
             steps {
                script{
                 gv.deployApp()
+                echo "deploying to ${ENV}"
                }
+
+
                 // withCredentials(
                 //     [
                 //         usernamePassword(
