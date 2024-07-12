@@ -3,7 +3,7 @@ pipeline {
    // tools {     maven 'maven-3.9'   jdk 'jdk-11'    }
 
    parameters{
-    choice(name:'VERSION',choice:['1.1.0','1.2.0','1.3.0'],description:'Choose the version to deploy')
+    choice(name:'VERSION',choices:['1.1.0','1.2.0','1.3.0'],description:'Choose the version to deploy')
     booleanParam(name:'executeTests',defaultValue:true,description:'Do you want to run the tests?')
    }
     stages {
