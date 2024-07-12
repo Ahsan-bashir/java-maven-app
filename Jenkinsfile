@@ -1,4 +1,5 @@
-def gv
+def gv = [:]
+
 pipeline {
     agent any
    // tools {     maven 'maven-3.9'   jdk 'jdk-11'    }
@@ -22,11 +23,12 @@ pipeline {
         }
 
         stage('init') {
-           
-
             steps{
                 script{
                     gv = load "script.groovy"
+                     if (gv == null) {
+                        error 'Failed to load script.groovy'
+                    }
                 }
             }
             
