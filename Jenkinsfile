@@ -8,6 +8,19 @@ pipeline {
     booleanParam(name:'executeTests',defaultValue:true,description:'Do you want to run the tests?')
    }
     stages {
+
+        stage('Check Script File') {
+            steps {
+                script {
+                    if (fileExists('script.groovy')) {
+                        echo 'script.groovy exists'
+                    } else {
+                        error 'script.groovy does not exist'
+                    }
+                }
+            }
+        }
+
         stage('init') {
            
 
