@@ -28,6 +28,11 @@ pipeline {
             }
         }
         stage('Deploy') {
+             when{
+        expression {
+            return env.BRANCH_NAME == 'main'
+        }
+    }
             steps {
                 script {
                     gv.deployApp()
