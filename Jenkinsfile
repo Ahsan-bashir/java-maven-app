@@ -1,4 +1,7 @@
+// for detecting groovy script in the same directory
+
 #!/user/bin/env groovy
+
 @Library('Jenkins-shared-library')
 def gv
 
@@ -19,7 +22,7 @@ pipeline {
         stage('Build JAR File') {
             steps {
                 script {
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
