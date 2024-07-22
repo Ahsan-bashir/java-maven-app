@@ -1,5 +1,3 @@
-// for detecting groovy script in the same directory
-
 #!/user/bin/env groovy
 
 @Library('Jenkins-shared-library')
