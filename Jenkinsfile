@@ -5,7 +5,6 @@ def gv
 
 pipeline {
     agent any
-    library 'Jenkins-shared-library'
     tools { 
         maven 'maven-3.9' 
     }
