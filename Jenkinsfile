@@ -1,3 +1,5 @@
+#!/user/bin/env groovy
+
 @Library('Jenkins-shared-library')
 def gv
 
@@ -25,7 +27,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    buildImage()
+                    buildImage 'ahsan1294/demo-app:jma-2.0'
                 }
             }
         }
