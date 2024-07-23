@@ -15,6 +15,7 @@ def buildImage(){
 def deployApp(){
       echo "Deploying the application..."
       echo "Testing the Automation..."
+      echo "Testing the Automation..."
      //echo"deploying ${params.VERSION}"
 }
 return this 
