@@ -50,9 +50,9 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    buildImage "ahsan1294/demo-app:$IMAGE_NAME"
+                    buildImage "ahsan1294/demo-app:${IMAGE_NAME}"
                     dockerLogin()
-                    dockerPush "ahsan1294/demo-app:$IMAGE_NAME"
+                    dockerPush "ahsan1294/demo-app:${IMAGE_NAME}"
                 }
             }
         }
