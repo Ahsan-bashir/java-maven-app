@@ -82,7 +82,7 @@ pipeline {
                     sh 'git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/Ahsan-bashir/java-maven-app.git'
                     sh 'git add .'
                     sh 'git commit -m "ci: version bump"'
-                    sh 'git push -u origin HEAD:Jenkins-shared-lib'
+                    sh 'git push origin HEAD:Jenkins-shared-lib'
                     }
                 }
             }
