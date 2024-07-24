@@ -16,6 +16,21 @@ pipeline {
     }
 
     stages {
+
+  stage('increment version') {
+            steps {
+                script {
+                    echo "incrementing version"
+                    sh 'mvn build-helper:parse-version versions:set \
+                    -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                    versions:commit'
+                    def matcher =readFile('pom.xml')=~ '<version>(.+)</version>'
+                    def version=matcher[0][1] 
+                    env.IMAGE_NAME="$version-$BUILD_NUMBER"
+                }
+            }
+        }
+
         stage('init') {
             steps {
                 script {
@@ -26,16 +41,18 @@ pipeline {
         stage('Build JAR File') {
             steps {
                 script {
-                    buildJar()
+                   // buildJar()
+                   echo 'building the applcation...'
+                   sh 'mvn clean package'
                 }
             }
         }
         stage('Build Image') {
             steps {
                 script {
-                    buildImage 'ahsan1294/demo-app:jma-3.0'
+                    buildImage "ahsan1294/demo-app:$IMAGE_NAME"
                     dockerLogin()
-                    dockerPush 'ahsan1294/demo-app:jma-3.0'
+                    dockerPush "ahsan1294/demo-app:$IMAGE_NAME"
                 }
             }
         }
