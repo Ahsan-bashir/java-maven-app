@@ -69,5 +69,22 @@ pipeline {
                 }
             }
         }
+        stage('commit version update'){
+            steps{
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'git status'
+                    sh 'git branch'
+                    sh 'git config --list'
+                    sh 'git config --global user.email "jenkins@gmail.com"'    
+                    sh 'git config --global user.name "jenkins"'  
+
+                    sh 'git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/Ahsan-bashir/java-maven-app.git'
+                    sh 'git add .'
+                    sh 'git commit -m "ci: version bump"'
+                    sh 'git push -u origin HEAD:Jenkins-shared-lib'
+                }
+            }
+        }
     }
 }
