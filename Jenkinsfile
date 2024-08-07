@@ -57,14 +57,14 @@ pipeline {
             }
         }
         stage('Deploy') {
-             when{
-        expression {
-            return env.BRANCH_NAME == 'main'
-        }
-    }
+           
             steps {
                 script {
-                    gv.deployApp()
+                    echo "deploying Docker image to EC2......"
+                    def dockerCmd="docker run -d -p 8080:8080 ${IMAGE_NAME}"
+                    sshagent(['ec2-server-key']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@23.20.51.226 ${dockerCmd}"
+                    }  
                    
                 }
             }
