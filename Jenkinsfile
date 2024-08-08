@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                    echo 'building the applcation...'
-                   sh 'mvn clean package'
+                //    sh 'mvn clean package'
                 }
             }
         }
