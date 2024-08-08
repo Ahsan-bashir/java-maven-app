@@ -1,0 +1,12 @@
+version: '3.9'
+services:   
+  java-maven-app:
+    image: ahsan1294/demo-app:jma-1.0
+    ports:
+      - 8080:8080  
+  postgress:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=my-pwd
