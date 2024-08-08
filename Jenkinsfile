@@ -4,7 +4,9 @@ pipeline {
     tools { 
         maven 'maven-3.9' 
     }
-
+     environment {
+        IMAGE_NAME = 'ahsan1294/demo-app:jma-2.0'
+    }
     stages {
 
         // stage('increment version') {
